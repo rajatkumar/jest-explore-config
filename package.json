@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "test": "yarn jest",
-    "tl": "NODE_DEBUG=logging yarn jest"
+    "tl": "NODE_DEBUG=logging yarn jest",
+    "tlb": "NODE_DEBUG=logging yarn jest --runInBand"
   },
   "dependencies": {
     "jest": "^26.3.0"
