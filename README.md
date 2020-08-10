@@ -78,7 +78,7 @@ Result:
 ([`globalSetup` Documentation](https://jestjs.io/docs/en/configuration#globalsetup-string))
 ([`globalTeardown` Documentation](https://jestjs.io/docs/en/configuration#globalteardown-string))
 
--   Checkout `explore_globals` branch
+-   Checkout `global_setup_teardown` branch
 -   See `jest.config.js`
 
 ```js
@@ -97,3 +97,5 @@ Results:
 -   `global` variable defined in `jest.config.js` cannot be read in `globalSetup` and `globalTeardown`
 -   Execution Sequence: `globalSetup` → ...[`beforeAll`, `beforeEach`, `test`, `afterEach`, `afterAll`]... → `globalTeardown`
 -   `globalConfig` passed to `globalSetup` and `globalTeardown` functions cannot bo modified!
+
+![Screenshot](img/global_setup_teardown.png)
