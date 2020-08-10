@@ -72,3 +72,28 @@ Result:
     -   Use `setupFiles` config instead
 
 ![Screenshot](img/explore_globals.png)
+
+## Explore Global Setup and Global Teardown
+
+([`globalSetup` Documentation](https://jestjs.io/docs/en/configuration#globalsetup-string))
+([`globalTeardown` Documentation](https://jestjs.io/docs/en/configuration#globalteardown-string))
+
+-   Checkout `explore_globals` branch
+-   See `jest.config.js`
+
+```js
+    globalSetup: './configFiles/globalSetup.js',
+    globalTeardown: './configFiles/globalTeardown.js',
+```
+
+Try running:
+
+-   `yarn tl`
+-   `yarn tlb`
+
+Results:
+
+-   Any `global` variable defined in `globalSetup` can be read in `globalTeardown` but it cannot be read by any of the tests or test-suite
+-   `global` variable defined in `jest.config.js` cannot be read in `globalSetup` and `globalTeardown`
+-   Execution Sequence: `globalSetup` → ...[`beforeAll`, `beforeEach`, `test`, `afterEach`, `afterAll`]... → `globalTeardown`
+-   `globalConfig` passed to `globalSetup` and `globalTeardown` functions cannot bo modified!
