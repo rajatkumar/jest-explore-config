@@ -3,17 +3,20 @@ const NAME = getTestNameFromFilepath(__filename);
 
 const { longRunningAdd, simpleAdd } = require('../src');
 describe(`${NAME}`, function() {
+    beforeAll(function() {
+        log(`${NAME} beforeAll`);
+    });
     beforeEach(function() {
-        log(
-            `${NAME} beforeEach - value of NODE_DEBUG: ${global.__NODE_DEBUG__}`
-        );
+        log(`${NAME} beforeEach`);
     });
 
     afterEach(function() {
         // this will show the modified value
-        log(
-            `${NAME} afterEach - value of NODE_DEBUG: ${global.__NODE_DEBUG__}`
-        );
+        log(`${NAME} afterEach`);
+    });
+    afterAll(function() {
+        // this will show the modified value
+        log(`${NAME} afterAll`);
     });
     it('tests simple add', function() {
         log(`${NAME} it - tests simple add`);
