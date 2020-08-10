@@ -55,7 +55,7 @@ module.exports = {
 -   Accessing `__NODE_DEBUG__` value
 
 ```js
-console.log(`Current __NODE_DEBUG__ value is \${global.__NODE_DEBUG__}`);
+console.log(`Current __NODE_DEBUG__ value is ${global.__NODE_DEBUG__}`);
 ```
 
 Try running:
