@@ -34,3 +34,41 @@ LOGGING 6121: test3 afterEach
 ![Screenshot](img/img_simple_setup.png)
 
 🎉🎉 Congrats! You have a working setup!
+
+## Explore Global Variables
+
+([`global` Documentation](https://jestjs.io/docs/en/configuration#globals-object))
+
+Set of `global` variables → made available in all test environments
+
+-   Checkout `explore_globals` branch
+-   See `jest.config.js`
+
+```js
+module.exports = {
+    globals: {
+        __NODE_DEBUG__: process.env.NODE_DEBUG,
+    },
+};
+```
+
+-   Accessing `__NODE_DEBUG__` value
+
+```js
+console.log(`Current __NODE_DEBUG__ value is ${global.__NODE_DEBUG__}`);
+```
+
+Try running:
+
+-   `yarn tl`
+-   `yarn tlb` (this runs the tests one after another and uses `--runInBand`)
+
+Result:
+
+-   Any mutation won't reflect between tests (even in the same test runs) although the mutation will be reflected for that particular test file
+    -   so any changes in `it` block is seen in `afterEach` block
+-   Values for global variables must be json-serializable.
+    -   You can't create a `function` and try using this `function` in your test!
+    -   Use `setupFiles` config instead
+
+![Screenshot](img/explore_globals.png)
