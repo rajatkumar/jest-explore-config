@@ -5,17 +5,16 @@ const { longRunningAdd, simpleAdd } = require('../src');
 describe(`${NAME}`, function() {
     beforeAll(function() {
         log(`${NAME} beforeAll`);
+        funnyHelloWorld(NAME);
     });
     beforeEach(function() {
         log(`${NAME} beforeEach`);
     });
 
     afterEach(function() {
-        // this will show the modified value
         log(`${NAME} afterEach`);
     });
     afterAll(function() {
-        // this will show the modified value
         log(`${NAME} afterAll`);
     });
     it('tests simple add', function() {
