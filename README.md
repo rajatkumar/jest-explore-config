@@ -99,3 +99,48 @@ Results:
 -   `globalConfig` passed to `globalSetup` and `globalTeardown` functions cannot bo modified!
 
 ![Screenshot](img/global_setup_teardown.png)
+
+## Explore SetupFiles and SetupFilesAfterEnv
+
+([`setupFiles` Documentation](https://jestjs.io/docs/en/configuration.html#setupfiles-array))
+([`setupFilesAfterEnv` Documentation](https://jestjs.io/docs/en/configuration.html#setupfilesafterenv-array))
+
+-   Checkout `setupfiles` branch
+-   See `jest.config.js`
+
+```js
+    setupFiles: ['./configFiles/setupFile1.js', './configFiles/setupFile2.js'],
+    setupFilesAfterEnv: [
+        './configFiles/setupFileAfterEnv1.js',
+        './configFiles/setupFileAfterEnv2.js',
+    ],
+```
+
+Try running:
+
+-   `yarn tlb` (`--runInBand` to see the behavior)
+
+Result:
+
+-   `setupFiles` and `setupFileAfterEnv` can access variables declared using `global`
+-   `setupFiles` can be used to create and set functions on `global` and these can be accessed in `setupFilesAfterEnv` as well as in your Test files (ex: `funnyHelloWorld` function created by `setupFile1.js`)
+-   `setupFiles` and `setupFileAfterEnv` are executed before each test file
+-   `setupFiles` is expected to be used to run some code to setup your environment before every test is run
+    -   you don't have access to functions like `beforeAll`, `beforeEach`, `afterAll`, `afterEach`
+-   `setupFilesAfterEnv` is expected to be used to configure the testing framework before each test file but after the the testing framework is installed in the environment. Think of it as the right place to run some common code that needs to happen for every test to customize the testing framework for your needs.
+    -   you have access to functions like `beforeAll`, `beforeEach`, `afterAll`, `afterEach`
+-   Lifecycle looks like:
+    -   globalSetup
+    -   For each test file
+        -   setupFile
+        -   setupFileAfterEnv
+        -   beforeAll from setupFileAfterEnv
+        -   beforeAll from test file
+        -   beforeEach from setupFileAfterEnv
+        -   beforeEach from test file
+        -   set of test from the file
+        -   afterEach from test file
+        -   afterEach from setupFileAfterEnv
+    -   globalTeardown
+
+![Screenshot](img/setupfiles.png)

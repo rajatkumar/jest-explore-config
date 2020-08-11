@@ -6,7 +6,6 @@ describe(`${NAME}`, function() {
     });
 
     afterEach(function() {
-        // this will show the modified value
         log(`${NAME} afterEach`);
     });
 
@@ -14,5 +13,6 @@ describe(`${NAME}`, function() {
         log(`${NAME} it`);
         log(`${NAME} Custom flag set to ${global.__customFlag__}`);
         log(`${NAME} Global NODE_DEBUG set to ${global.__NODE_DEBUG__}`);
+        funnyHelloWorld(NAME);
     });
 });
