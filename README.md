@@ -135,6 +135,7 @@ Result:
 ([`testEnvironmentOptions` Documentation](https://jestjs.io/docs/en/configuration#testenvironmentoptions-object))
 
 -   Checkout `explore_globals` branch
+-   run `yarn install`
 -   See `jest.config.js`
 
 ```js

@@ -21,7 +21,7 @@ class CustomTestEnvironment extends NodeEnvironment {
     async setup() {
         log(`${NAME} Setup`);
         // lets modify our global
-        // this.myConfig.globals.__NODE_DEBUG__ = 'NOT LOGGING!'; // <-- you can set this value but this is incorrect way
+        // this.myConfig.globals.__NODE_DEBUG__ = 'NOT LOGGING!'; // <-- you can set this value but this is incorrect way of doing it
         this.global.__NODE_DEBUG__ = 'NOT LOGGING!'; // <-- you can play around with this too!
         log(`${NAME} changed __NODE_DEBUG__`);
         // alternate way to access the same value
