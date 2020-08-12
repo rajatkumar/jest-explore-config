@@ -26,5 +26,13 @@ describe(`${NAME}`, function() {
         log(`${NAME} it - tests long running add`);
         const value = await longRunningAdd(2, 2, 1000);
         expect(value).toBe(4);
+        // note: we can skip calling with global prefix if they were done in setup files or through
+        // jest config
+        // We can read the values passed using `testEnvironmentOptions` in tests
+        // example: `${teKey1} | ${teKey2}`
+        funnyHelloWorld(NAME);
+        log(
+            `${NAME} ${__NEW_VALUE__} |  ${__NODE_DEBUG__} | ${teKey1} | ${teKey2}`
+        );
     });
 });
