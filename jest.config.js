@@ -9,4 +9,10 @@ module.exports = {
         './configFiles/setupFileAfterEnv1.js',
         './configFiles/setupFileAfterEnv2.js',
     ],
+    testEnvironment: './configFiles/customTestEnvironment.js',
+    testEnvironmentOptions: {
+        teKey1: 'teValue1',
+        teKey2: 'teValue2',
+    },
+    testRunner: 'jest-circus/runner',
 };

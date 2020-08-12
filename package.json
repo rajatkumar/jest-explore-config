@@ -9,6 +9,7 @@
     "tlb": "NODE_DEBUG=logging yarn jest --runInBand"
   },
   "dependencies": {
-    "jest": "^26.3.0"
+    "jest": "^26.3.0",
+    "jest-circus": "^26.3.0"
   }
 }
