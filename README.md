@@ -229,7 +229,7 @@ We forced CLI to display `✕` even though the test passed by modifying the valu
 
 ## Explore Test Runner
 
-([`runner` Documentation](https://jestjs.io/docs/en/configuration#runner-string))
+([`testRunner` Documentation](https://jestjs.io/docs/en/configuration#testrunner-string))
 
 -   Checkout `testRunner` branch
 -   See `jest.config.js`
