@@ -1,7 +1,6 @@
 const { getTestNameFromFilepath, log } = require('../helpers');
 const NAME = getTestNameFromFilepath(__filename);
 module.exports = async function(globalConfig) {
-    // log(globalConfig);
     log(`${NAME} - Current __NODE_DEBUG__ value is ${global.__NODE_DEBUG__}`);
     // let's change some existing config here
     globalConfig.maxConcurrency = 2;
