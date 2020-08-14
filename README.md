@@ -179,3 +179,50 @@ Result:
 -   values passed using `testEnvironmentOptions` in `jest.config.js` can be accessed in `customTestEnvironment` and in our tests as well
 
 ![Screenshot](img/testenv.png)
+
+## Explore Runner
+
+([`runner` Documentation](https://jestjs.io/docs/en/configuration#runner-string))
+
+-   Checkout `runner` branch
+-   See `jest.config.js`
+
+```js
+    runner: './configFiles/customRunner.js',
+```
+
+Try running:
+
+-   `yarn tl`
+
+Results:
+
+-   you can create your own custom Runner (default is `jest-runner` in previous example we used `jest-circus/runner`)
+-   Lifecycle looks like:
+    -   globalSetup
+    -   `customRunner` gets initialized
+    -   `customRunner`'s `runTests` is called with with list of tests (responsible for running these tests)
+    -   For each test file (based on logic inside `runTests` these test files can run in parallel or sequentially)
+        -   customTestEnvironment is instantiated: `constructor`
+        -   setupFile
+        -   customTestEnvironment `setup`
+        -   setupFileAfterEnv
+        -   beforeAll from setupFileAfterEnv
+        -   beforeAll from test file
+        -   customTestEnvironment `handleTestEvent` - test_start
+        -   beforeEach from setupFileAfterEnv
+        -   beforeEach from test file
+        -   customTestEnvironment `handleTestEvent` - test_fn_start
+        -   set of tests from the file
+        -   afterEach from test file
+        -   afterEach from setupFileAfterEnv
+        -   afterAll from test file
+        -   afterAll from setupFileAfterEnv
+        -   customTestEnvironment `teardown`
+    -   globalTeardown
+-   We rely on default `jest-runner`'s `runTest` function in the code (I am sure we can build our own as well!)
+    -   this internally calls `jest-jasmine` or `jest-circus/runner` (when `process.env.JEST_CIRCUS === '1'`)
+-   We can also customize the execution a little bit by modifying the value returned by `runTest`
+
+We forced CLI to display `✕` even though the test passed by modifying the value to `failed`
+![Screenshot](img/runner.png)

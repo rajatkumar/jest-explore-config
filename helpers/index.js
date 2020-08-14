@@ -30,6 +30,9 @@ function getTestNameFromFilepath(filepath) {
     if (name.includes('TestEnv')) {
         textColor = colors.cyan;
     }
+    if (name.includes('Runner')) {
+        textColor = colors.red;
+    }
     return `${textColor} ${name}`;
 }
 

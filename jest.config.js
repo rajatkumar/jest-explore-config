@@ -14,5 +14,5 @@ module.exports = {
         teKey1: 'teValue1',
         teKey2: 'teValue2',
     },
-    testRunner: 'jest-circus/runner',
+    runner: './configFiles/customRunner.js',
 };
