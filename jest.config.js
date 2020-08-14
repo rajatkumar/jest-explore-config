@@ -15,4 +15,5 @@ module.exports = {
         teKey2: 'teValue2',
     },
     runner: './configFiles/customRunner.js',
+    testRunner: './configFiles/customTestRunner.js',
 };
