@@ -197,7 +197,7 @@ Try running:
 
 Results:
 
--   you can create your own custom Runner (default is `jest-runner` in previous example we used `jest-circus/runner`)
+-   you can create your own custom Runner (default is `jest-runner` in previous example we used `jest-circus`)
 -   Lifecycle looks like:
     -   globalSetup
     -   `customRunner` gets initialized
@@ -226,3 +226,48 @@ Results:
 
 We forced CLI to display `✕` even though the test passed by modifying the value to `failed`
 ![Screenshot](img/runner.png)
+
+## Explore Test Runner
+
+([`runner` Documentation](https://jestjs.io/docs/en/configuration#runner-string))
+
+-   Checkout `testRunner` branch
+-   See `jest.config.js`
+
+```js
+    testRunner: './configFiles/customTestRunner.js',
+```
+
+Try running:
+
+-   `yarn tl`
+
+Results:
+
+-   You can create your own custom Test Runner (default is `jest-jasmine2` or we can even use `jest-circus/runner`)
+-   Lifecycle looks like:
+    -   globalSetup
+    -   `customRunner` gets initialized
+    -   `customRunner`'s `runTests` is called with with list of tests (responsible for running these tests)
+    -   For each test file (based on logic inside `runTests` these test files can run in parallel or sequentially)
+        -   `customTestEnvironment` is instantiated: `constructor`
+        -   setupFiles
+        -   `customTestEnvironment` -> `setup()`
+        -   `customTestRunner` is invoked
+            -   setupFileAfterEnv
+            -   beforeAll from setupFileAfterEnv
+            -   beforeAll from test file
+            -   customTestEnvironment `handleTestEvent` - test_start (only with `jest-circus`)
+            -   beforeEach from setupFileAfterEnv
+            -   beforeEach from test file
+            -   customTestEnvironment `handleTestEvent` - test_fn_start (only with `jest-circus`)
+            -   set of tests from the file
+            -   afterEach from test file
+            -   afterEach from setupFileAfterEnv
+            -   afterAll from test file
+            -   afterAll from setupFileAfterEnv
+        -   customTestEnvironment `teardown`
+    -   globalTeardown
+-   This is responsible for running the actual test and knows what to do when we encounter test functions like `beforeAll`, `beforeEach`, `afterAll`, `afterEach`, '`it` or `describe`
+
+In the code example, the `customTestRunner` randomly picks one of `jest-jasmine2` or `jest-circus/runner` and runs the tests through them.
